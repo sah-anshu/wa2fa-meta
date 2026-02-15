@@ -122,6 +122,14 @@
                                     <include>com.googlecode.libphonenumber:libphonenumber</include>
                                 </includes>
                             </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>com.googlecode.libphonenumber:libphonenumber</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                             <relocations>
                                 <relocation>
                                     <pattern>com.google.i18n.phonenumbers</pattern>
