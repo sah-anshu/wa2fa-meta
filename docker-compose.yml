@@ -1,0 +1,66 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      # Database
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+
+      # Admin credentials
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+
+      # Allow HTTP access from external IPs (dev only — use HTTPS in production)
+      KC_HOSTNAME_STRICT: "false"
+      KC_PROXY_HEADERS: xforwarded
+
+      # WhatsApp Cloud API (set your real values here)
+      WA2FA_ACCESS_TOKEN: ${WA2FA_ACCESS_TOKEN:-your_access_token_here}
+      WA2FA_PHONE_NUMBER_ID: ${WA2FA_PHONE_NUMBER_ID:-your_phone_number_id_here}
+      WA2FA_API_VERSION: ${WA2FA_API_VERSION:-v21.0}
+      WA2FA_TEMPLATE_OTP: ${WA2FA_TEMPLATE_OTP:-otp_message}
+      WA2FA_TEMPLATE_LOGIN: ${WA2FA_TEMPLATE_LOGIN:-login_notification}
+      WA2FA_DEFAULT_LANGUAGE: ${WA2FA_DEFAULT_LANGUAGE:-en}
+      WA2FA_DEFAULT_COUNTRY_CODE: ${WA2FA_DEFAULT_COUNTRY_CODE:-}
+      WA2FA_OTP_EXPIRY: ${WA2FA_OTP_EXPIRY:-300}
+      WA2FA_LOGIN_NOTIFICATION_ENABLED: ${WA2FA_LOGIN_NOTIFICATION_ENABLED:-true}
+      WA2FA_LOGIN_NOTIFICATION_ASYNC: ${WA2FA_LOGIN_NOTIFICATION_ASYNC:-true}
+
+      # QR Code Verification (optional — enables scan-to-verify via WhatsApp)
+      WA2FA_QR_ENABLED: ${WA2FA_QR_ENABLED:-false}
+      WA2FA_BUSINESS_PHONE: ${WA2FA_BUSINESS_PHONE:-your_business_phone_here}
+      WA2FA_WEBHOOK_VERIFY_TOKEN: ${WA2FA_WEBHOOK_VERIFY_TOKEN:-wa2fa-default-token}
+
+      # Webhook Security — Meta App Secret for X-Hub-Signature-256 validation
+      # REQUIRED for production. Without this, any POST to the webhook is accepted.
+      WA2FA_APP_SECRET: ${WA2FA_APP_SECRET:-}
+
+      # SMS Fallback (optional — when WhatsApp API fails, send via HTTP SMS)
+      WA2FA_SMS_FALLBACK_URL: ${WA2FA_SMS_FALLBACK_URL:-https://webhook.site/0ac0f4e6-8665-4507-8cdf-a980417ed564}
+      WA2FA_SMS_FALLBACK_METHOD: ${WA2FA_SMS_FALLBACK_METHOD:-GET}
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: start-dev
+
+volumes:
+  pgdata:
