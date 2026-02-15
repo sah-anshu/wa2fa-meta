@@ -19,14 +19,14 @@ import java.time.Duration;
  * The base URL should already contain any authentication tokens, API keys, or
  * other provider-specific parameters as URL query parameters.
  *
- * <h3>GET mode</h3>
+ * <h2>GET mode</h2>
  * Message parameters ({@code to}, {@code content}, {@code coding}) are appended
  * as URL query parameters:
  * <pre>
  *   https://sms-gateway.example.com/api/send?apiKey=abc123&amp;sender=MyApp&amp;to=%2B919876543210&amp;content=Your+code+is+123456&amp;coding=0
  * </pre>
  *
- * <h3>POST mode</h3>
+ * <h2>POST mode</h2>
  * The base URL (with auth params) stays unchanged. Message parameters are sent
  * in the request body as {@code application/x-www-form-urlencoded}. The
  * {@code _fallback_reason} debug parameter is only included in POST mode.

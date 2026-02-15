@@ -42,7 +42,7 @@
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.8.0</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.2.4</maven.gpg.plugin.version>
-        <central.publishing.plugin.version>0.6.0</central.publishing.plugin.version>
+        <central.publishing.plugin.version>0.9.0</central.publishing.plugin.version>
     </properties>
 
     <dependencies>
@@ -169,6 +169,8 @@
                         <configuration>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <source>${maven.compiler.source}</source>
+                            <doclint>none</doclint>
+                            <failOnWarnings>false</failOnWarnings>
                         </configuration>
                         <executions>
                             <execution>

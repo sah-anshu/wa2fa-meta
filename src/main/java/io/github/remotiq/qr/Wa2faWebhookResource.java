@@ -41,7 +41,7 @@ public class Wa2faWebhookResource {
 
     /**
      * WhatsApp Webhook Verification (GET).
-     * Meta sends: GET ?hub.mode=subscribe&hub.challenge=xxx&hub.verify_token=yyy
+     * Meta sends: GET ?hub.mode=subscribe&amp;hub.challenge=xxx&amp;hub.verify_token=yyy
      * We must return hub.challenge if hub.verify_token matches our configured token.
      */
     @GET

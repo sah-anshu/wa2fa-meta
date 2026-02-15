@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sun Feb 15 22:16:21 IST 2026
+bf4003cbd4e03c9bfe3d705238850cd344778778@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1771173981560
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.sonatype.central\:central-publishing-maven-plugin\:pom\:0.6.0 from/to central (https\://repo.maven.apache.org/maven2)\: repo.maven.apache.org\: nodename nor servname provided, or not known

@@ -10,7 +10,7 @@ import java.security.MessageDigest;
 /**
  * Validates webhook payload signatures to prevent forged requests.
  *
- * <h3>Meta WhatsApp Cloud API (X-Hub-Signature-256)</h3>
+ * <h2>Meta WhatsApp Cloud API (X-Hub-Signature-256)</h2>
  * Meta signs every webhook POST with HMAC-SHA256 using the App Secret.
  * The signature is sent in the {@code X-Hub-Signature-256} header as:
  * {@code sha256=<hex_signature>}
