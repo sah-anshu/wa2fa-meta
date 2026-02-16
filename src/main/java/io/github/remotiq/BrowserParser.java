@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2026-present RemotiQ (Anshu S.)
+ * SPDX-License-Identifier: MIT
+ *
+ * This file is part of wa2fa-meta (https://github.com/RemotiQ/wa2fa-meta).
+ * Do not remove this header.
+ * The copyright and permission notice must be included in all copies
+ * or substantial portions of the Software. See LICENSE.
+ */
+
 package io.github.remotiq;
 
 /**
